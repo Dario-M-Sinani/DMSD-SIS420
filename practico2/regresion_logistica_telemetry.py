@@ -29,6 +29,21 @@ except FileNotFoundError:
     print(f"Error: No se encontró el archivo {ruta_dataset}")
     exit()
 
+print("\n================= ANÁLISIS DE DATOS DEL DATASET =================")
+print(f"1. Tamaño del dataset original: {data.shape[0]} filas y {data.shape[1]} columnas.")
+print("\n2. Tipos de datos en el dataset (resumen):")
+print(data.dtypes.value_counts())
+
+# Columnas que vamos a utilizar vs las que anularemos
+columnas_seleccionadas = ['speed', 'current_engine_rpm', 'brake']
+columnas_anuladas = [col for col in data.columns if col not in columnas_seleccionadas]
+
+print(f"\n3. Selección de características:")
+print(f"   -> Se seleccionarán {len(columnas_seleccionadas)} columnas relevantes para el modelo:")
+print(f"      {columnas_seleccionadas}")
+print(f"   -> Se anularán/descartarán las {len(columnas_anuladas)} columnas restantes.")
+print(f"      (Ejemplo de anuladas: {columnas_anuladas[:5]}...)")
+
 # El dataset original tiene 70+ columnas. Para este ejercicio de clasificación bi-dimensional, 
 # seleccionaremos dos características numéricas relevantes (X):
 #   - speed: Velocidad del vehículo
@@ -38,7 +53,13 @@ except FileNotFoundError:
 # Crearemos nuestra variable binaria 'y': 1 si 'brake' > 0 (Frenando), 0 si 'brake' == 0 (No Frenando)
 
 # Filtramos filas que tengan valores nulos en estas columnas por seguridad
-data = data.dropna(subset=['speed', 'current_engine_rpm', 'brake'])
+filas_antes = data.shape[0]
+data = data.dropna(subset=columnas_seleccionadas)
+filas_despues = data.shape[0]
+
+print(f"\n4. Limpieza de datos (nulos):")
+print(f"   -> Se eliminaron {filas_antes - filas_despues} filas que contenían valores nulos en las columnas seleccionadas.")
+print("=================================================================\n")
 
 # Para acelerar el entrenamiento y no saturar la gráfica, podemos tomar una muestra
 # aleatoria de 1000 registros (opcional, pero recomendado para datasets masivos como este)
@@ -50,7 +71,7 @@ y = (data_sample['brake'] > 0).astype(int).values
 
 m = y.size # Cantidad de ejemplos
 
-print(f"Total de datos cargados para entrenamiento: {m}")
+print(f"Total de datos cargados para entrenamiento (muestra): {m}")
 print(f"Desglose de 'y' (1 = Frenando, 0 = No Frenando): \n{pd.Series(y).value_counts()}")
 
 # ------------------------------------------------------------------------------
@@ -139,6 +160,23 @@ print(f'Gradiente en theta inicial: {grad}')
 # En lugar de hacer el bucle de descenso de gradiente manual, usamos una librería 
 # experta que lo hará más rápido y encontrará thetas óptimos automáticamente.
 
+historial_costo = []
+historial_p = [] # Guardaremos las predicciones 'p' en cada iteración
+
+def callback_optimizacion(theta_actual):
+    """
+    Función que se llama en cada iteración de la optimización
+    para guardar el costo y las predicciones históricas 'p'.
+    """
+    # Guardar costo
+    costo_actual, _ = costFunction(theta_actual, X_ready, y)
+    historial_costo.append(costo_actual)
+    
+    # Guardar predicciones 'p' históricas
+    probabilidades = sigmoid(X_ready.dot(theta_actual))
+    p = np.round(probabilidades)
+    historial_p.append(p)
+
 print('\nOptimizando parámetros con scipy.optimize.minimize...')
 options= {'maxiter': 1000} # Máximo de iteraciones permitidas
 
@@ -148,6 +186,7 @@ res = optimize.minimize(costFunction,      # Nuestra función a minimizar
                         (X_ready, y),      # Los datos extra que recibe costFunction
                         jac=True,          # Le indicamos que costFunction también devuelve el gradiente
                         method='TNC',      # Algoritmo de optimización escogido
+                        callback=callback_optimizacion, # Pasamos la función callback
                         options=options)
 
 # Obtenemos el costo minimizado y el array de Thetas optimizados
@@ -205,5 +244,35 @@ plot_y = (-1. / theta_optimizado[2]) * (theta_optimizado[1] * plot_x + theta_opt
 pyplot.plot(plot_x, plot_y, 'b-', label='Frontera de Decisión')
 pyplot.legend()
 
-# Mostrar última gráfica
+# Mostrar la primera gráfica
+pyplot.show()
+
+# ------------------------------------------------------------------------------
+# 8. Gráficas de Aprendizaje (Costo y Precisión vs Iteraciones)
+# ------------------------------------------------------------------------------
+print('\nGenerando gráficas de la curva de aprendizaje (Costo y Precisión)...')
+iteraciones = np.arange(1, len(historial_costo) + 1)
+
+# Calculamos la precisión histórica basándonos en el historial de 'p'
+historial_precision = [np.mean(p == y) * 100 for p in historial_p]
+
+fig, (ax1, ax2) = pyplot.subplots(1, 2, figsize=(14, 5))
+
+# Gráfico 1: Costo (J) vs Iteraciones
+ax1.plot(iteraciones, historial_costo, 'b-', linewidth=2)
+ax1.set_xlabel('Iteraciones')
+ax1.set_ylabel('Costo (J)')
+ax1.set_title('Historial de Costo durante la Optimización')
+ax1.grid(True)
+
+# Gráfico 2: Precisión vs Iteraciones
+ax2.plot(iteraciones, historial_precision, 'g-', linewidth=2)
+ax2.set_xlabel('Iteraciones')
+ax2.set_ylabel('Precisión (%)')
+ax2.set_title('Historial de Precisión durante la Optimización')
+ax2.grid(True)
+
+pyplot.tight_layout()
+
+# Mostrar gráficas conjuntas
 pyplot.show()
