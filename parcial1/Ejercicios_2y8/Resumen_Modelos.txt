@@ -1,0 +1,35 @@
+RESUMEN DE LOS MÓDULOS DE PYTHON (.py)
+
+1. datasetcancer.py
+Este script implementa un modelo de Regresión Logística desde cero para diagnosticar cáncer de seno. 
+- Utiliza matemáticas puras (`calcularCosto` y `calcularGradiente`) y minimiza el error empleando el optimizador 'TNC' de la librería SciPy.
+- Escala los datos (normalización) y separa el 75% para entrenamiento.
+- Calcula las probabilidades de que un tumor sea maligno o benigno, mostrando gráficamente un diagrama de dispersión entre las predicciones del modelo frente a los valores reales, además de un histograma de la distribución de esas predicciones.
+
+2. datasetmimic.py
+Sigue la misma estructura matemática de Regresión Logística que el código anterior, pero resolviendo un problema clínico de cuidado intensivo.
+- Evalúa los días de estadía de un paciente y su categoría de diagnóstico médico (ICD-9).
+- Su objetivo es predecir una variable binaria: la mortalidad/supervivencia del paciente dentro del hospital.
+- Igualmente, imprime en consola la precisión obtenida y grafica visualmente con qué certeza el modelo logró identificar los decesos.
+
+DETALLES DE LOS DATASETS 
+
+--- 8. Breast Cancer Wisconsin (Diagnostic) ---
+* Fuente: Dr. William H. Wolberg / UCI ML Repository
+* Problema: Clasificación binaria
+* Variable objetivo: Diagnosis — ¿el tumor es maligno (M -> 1) o benigno (B -> 0)?
+* Descripción: Contiene características geométricas (radio, textura, área) de los núcleos celulares de masas mamarias observadas en estudios de aspiración.
+* Estrategia de Limpieza y ML: 
+  - Se descartó la columna "ID" al ser irrelevante predictivamente.
+  - Para los nulos detectados en "Bare_Nuclei", se prefirió el borrado de esas pocas filas en vez de inventar datos de biopsias falsas.
+  - Se le aplicó StandardScaler para unificar el tamaño numérico de todas las mediciones de las células.
+
+--- 2. MIMIC-III Clinical Database ---
+* Fuente: PhysioNet / MIT — Demo v1.4
+* Problema: Clasificación (Predicción de mortalidad)
+* Variable objetivo: Sobrevivencia o Fallecimiento (HOSPITAL_EXPIRE_FLAG).
+* Descripción: Es un registro de admisiones de pacientes en unidades de cuidados intensivos, conteniendo todo su trayecto y signos vitales mediante identificadores médicos (ICD-9).
+* Estrategia de Limpieza y ML:
+  - Se calculó la duración numérica de las internaciones restando fechas.
+  - Miles de códigos diagnósticos ICD-9 de alta complejidad se truncaron a sus primeros 3 caracteres funcionales previniendo un colapso dimensional.
+  - En manejo de nulos longitudinales se aplicó "Forward Fill" (arrastre hacia adelante) para proyecciones de signos vitales.
