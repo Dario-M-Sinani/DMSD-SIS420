@@ -1,0 +1,29 @@
+
+=== dataset1 ===
+
+=== dataset2 ===
+
+=== dataset3 ===
+File: BAX_L.xpt -> Rows: 4771, Columns: 45
+File: BMX_L.xpt -> Rows: 8860, Columns: 22
+File: BPXO_L.xpt -> Rows: 7801, Columns: 12
+File: LUX_L.xpt -> Rows: 7199, Columns: 13
+
+=== dataset4 ===
+File: sampleSubmission.csv -> Rows: 6493, Columns: 2
+
+=== dataset5 ===
+File: adult.data -> Rows: 32561, Columns: 15
+
+=== dataset6 ===
+File: crx.data -> Rows: 690, Columns: 16
+
+=== dataset7 ===
+
+=== dataset8 ===
+File: breast-cancer-wisconsin.data -> Rows: 699, Columns: 11
+File: wdbc.data -> Rows: 569, Columns: 32
+File: wpbc.data -> Rows: 198, Columns: 35
+
+=== dataset9 ===
+File: mening missing 12.csv -> Rows: 1200, Columns: 14
