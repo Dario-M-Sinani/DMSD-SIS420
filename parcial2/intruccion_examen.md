@@ -1,0 +1,3 @@
+Programa el agente que le toque de acuerdo a la asignación. Para cada agente, se debe identificar y explicar: Los estados, el entorno, la política, recompensa y la función de acción. Para el proceso de exploración y explotación se debe aplicar una de las siguientes estrategias: "Selección de acciones con intervalo de confianza" ó "Algoritmo del gradiente".
+
+Piedra, papel o tijera: Construye un agente que aprenda a jugar contra una persona. Explica cómo prueba jugadas nuevas y cómo aprovecha patrones del rival.
