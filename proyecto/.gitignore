@@ -1,0 +1,48 @@
+# Entornos Virtuales de Python
+venv/
+env/
+.env/
+venv*/
+ENV/
+
+# Módulos de Node.js (Frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Bases de datos SQLite locales
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos de entorno y secretos
+.env
+.env.development
+.env.local
+.env.production
+.env.*.local
+
+# Archivos construidos / Dist (Frontend de Vite/React)
+dist/
+build/
+dist-ssr/
+
+# Modelos entrenados e históricos grandes (opcional, si no quieres subirlos a GitHub)
+# Si deseas subir el CSV histórico, puedes comentar la siguiente línea
+*.pkl
+# historico_ventas.csv 
+
+# Archivos de SO y Editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

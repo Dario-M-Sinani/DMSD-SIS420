@@ -1,0 +1,26 @@
+{
+    "info": {
+        "name": "API de Predicción de Ventas",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Predecir Venta de Productos (Lote)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": "http://127.0.0.1:8000/api/predecir/",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombres_productos\": [\n        \"OUR10002030\",\n        \"BIO130350\",\n        \"PRODUCTO_INEXISTENTE\"\n    ],\n    \"promo\": 1,\n    \"feria\": 0,\n    \"lluvia\": 0\n}"
+                }
+            },
+            "response": []
+        }
+    ]
+}

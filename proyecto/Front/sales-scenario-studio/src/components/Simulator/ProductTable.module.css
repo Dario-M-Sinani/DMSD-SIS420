@@ -1,0 +1,70 @@
+/* src/pages/Simulador/components/ProductTable.module.css */
+
+.tableContainer {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.15s;
+}
+
+.tr:hover {
+  background-color: #f9fafb;
+}
+
+.td {
+  padding: 16px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--teal);
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.badgeHigh {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badgeMedium {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badgeLow {
+  background-color: #d1fae5;
+  color: #065f46;
+}

@@ -1,0 +1,77 @@
+/* src/pages/Simulador/components/ResultChart.module.css */
+
+.resultCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resultTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark-shadow);
+}
+
+.stockBadge {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.stockSufficient {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.stockInsufficient {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.legendHistorical {
+  background-color: var(--teal);
+}
+
+.legendPrediction {
+  background-color: var(--saffron);
+}

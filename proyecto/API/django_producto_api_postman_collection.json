@@ -1,0 +1,176 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "name": "Django Producto API",
+    "description": "API REST para el modelo Producto con operaciones CRUD generada por Gemini.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar Productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", ""]
+            },
+            "description": "Obtiene una lista de todos los productos."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/:id/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID del producto"
+                }
+              ]
+            },
+            "description": "Obtiene los detalles de un producto específico por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"codigo\": \"PROD001\",\n    \"nombre\": \"Laptop Gamer\",\n    \"descripcion\": \"Laptop con tarjeta RTX 4090\",\n    \"stock\": 15,\n    \"costo\": \"1800.50\",\n    \"precio_venta\": \"2500.75\",\n    \"pais\": \"Taiwan\",\n    \"tiempo_llegada\": \"10 dias\",\n    \"cantidad_minima_compra\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", ""]
+            },
+            "description": "Crea un nuevo producto."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Producto (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"codigo\": \"PROD001-MOD\",\n    \"nombre\": \"Laptop Gamer Pro\",\n    \"descripcion\": \"Laptop con tarjeta RTX 4090 y 64GB RAM\",\n    \"stock\": 10,\n    \"costo\": \"1850.00\",\n    \"precio_venta\": \"2600.00\",\n    \"pais\": \"Taiwan\",\n    \"tiempo_llegada\": \"8 dias\",\n    \"cantidad_minima_compra\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/:id/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID del producto a actualizar"
+                }
+              ]
+            },
+            "description": "Actualiza completamente un producto existente por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Producto Parcialmente (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"stock\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/:id/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID del producto a actualizar parcialmente"
+                }
+              ]
+            },
+            "description": "Actualiza parcialmente un producto existente por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar Producto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/:id/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID del producto a eliminar"
+                }
+              ]
+            },
+            "description": "Elimina un producto existente por su ID."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ]
+}
